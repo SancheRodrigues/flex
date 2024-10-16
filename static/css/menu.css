@@ -1,0 +1,114 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.sidebar{
+    position: absolute;
+    width: 60px;
+    height: 100vh;
+    background: #fff;
+    overflow: hidden;
+    transition: .5s;
+}
+
+.sidebar:hover{
+    width: 300px;
+}
+
+.sidebar ul li:hover {
+    background: #f3f3f3;
+}
+
+.sidebar ul li a {
+    display: flex;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.sidebar ul li .icone{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    min-width: 60px;
+    height: 60px;
+    color: #333;
+}
+
+.sidebar ul li .titulo{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: .05rem;
+}
+
+.sidebar ul li .logo{
+    margin-bottom: 50px;
+}
+
+.sidebar ul li .logo:hover{
+    background: none;
+}
+
+.sidebar ul li .logo .icone{
+    font-size: 2rem;
+
+}
+
+.sidebar ul li .logo .titulo {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.sidebar ul li:last-of-type{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.sidebar ul li.conta{
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+}
+
+.sidebar ul li.conta .titulo{
+    text-transform: none;
+}
+
+.sidebar ul li form {
+    display: flex; 
+}
+
+.sidebar ul li form button {
+    display: flex;
+    align-items: center;
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    padding: 0; 
+    width: 100%; 
+
+}
+.main-content {
+    flex-grow: 1; 
+    transition: margin-left 0.5s ease; 
+
+}
+
+.sidebar:hover + .main-content {
+    margin-left: 300px; /* Desloca o main-content para a direita */
+}
+
+.container {
+    display: flex;
+}
+

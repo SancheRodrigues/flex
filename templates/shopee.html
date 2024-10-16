@@ -1,0 +1,60 @@
+{% extends 'menu.html' %}
+{% block title %}Shopee{% endblock %}
+
+
+{% block content %}
+
+<main class="main-content">
+    <div class="table-responsive">
+        <form id="deleteForm" method="POST" action="{% url 'bulk_delete_shopee' %}">
+            {% csrf_token %}
+            <table class="records" id="ShopeeTable">
+                <a class="a darkblue" href="/shopee/registrar_coleta">Registrar Coleta</a>
+                <button type="button" class="a red" id="bulkDeleteButton" style="display:none;" onclick="showConfirmationModalForSelected()">
+                    <i class="fas fa-trash-alt"></i> Excluir
+                </button>
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)"></th>
+                        <th>Data</th>
+                        <th>Quantidade</th>
+                        <th>Documento</th>
+                        <th>Nome do Portador</th>
+                        <th>Assinatura</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s, dt in shopees %}
+                    <tr>
+                        <td><input type="checkbox" class="selectItem" name="items" value="{{ s.id }}" onclick="toggleBulkDeleteButton()"></td>
+                        <td>{{ s.data|date:"j \d\e F H:i" }}</td>
+                        <td>{{ s.quantidade }}</td>
+                        <td>{{ s.documento }}</td>
+                        <td>{{ s.nome }}</td>
+                        <td>
+                            {% if s.assinatura %}
+                                <img src="{{ s.assinatura }}" alt="Assinatura" style="max-height: 100px; max-width: 200px;">
+                            {% else %}
+                                Sem assinatura
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="dropdown" id="dropdownMenu">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-tabela" href="/shopee/edit/{{ s.id }}"><i class="fas fa-edit"></i> Editar</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    </div>
+</main>
+
+{% endblock %}

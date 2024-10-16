@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #FAFAFA;
+}
+
+.formLogin {
+    display: flex;
+    flex-direction: column;
+    background-color: #34495e; /* Cor de fundo atualizada */
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    gap: 15px;
+    width: 90%; /* Ajuste a largura conforme necessário */
+    max-width: 400px; /* Limite máximo para o tamanho do formulário */
+}
+
+.page .imagem {
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.areaLogin img {
+    width: 100%;
+    height: auto;
+}
+
+.formLogin h1 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 2.2em;
+    color: #ECF0F1; /* Cor do texto mais clara para contraste */
+}
+
+.formLogin p {
+    font-size: 14px;
+    color: #BDC3C7; /* Cor do texto para parágrafos */
+    margin-bottom: 15px;
+}
+
+.formLogin input {
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #BDC3C7; /* Cor mais suave para a borda */
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.formLogin input:focus {
+    border: 1px solid #f72585;
+    box-shadow: 0 0 5px rgba(247, 37, 133, 0.5);
+}
+
+.formLogin label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ECF0F1; /* Cor do texto mais clara para os rótulos */
+}
+
+.formLogin a {
+    display: inline-block;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #BDC3C7; /* Cor do texto para links */
+    transition: all 0.3s ease;
+}
+
+.formLogin a:hover {
+    color: #f72585; /* Cor de destaque para hover */
+}
+
+.formLogin .btn {
+    background-color: #ff49a6; /* Cor do botão */
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    background-color: #ff0676; /* Cor do botão em hover */
+}
+
+@media (max-width: 480px) {
+    .formLogin {
+        width: 70%; /* Ajuste em telas menores */
+    }
+}

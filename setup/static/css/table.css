@@ -1,0 +1,140 @@
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 80%;
+    margin: 5vh auto;
+    background-color: #fff; /* White background for main content */
+    padding: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for main container */
+    border-radius: 8px; /* Rounded corners */
+    gap: 20px; /* Space between elements */
+}
+
+.records {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.records th {
+    background-color: #34495e;
+    color: white;
+    text-align: left;
+    padding: 12px 15px;
+}
+
+.records td {
+    padding: 30px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.records tr:hover {
+    background-color: #ecf0f1;
+}
+
+.a.darkblue, .a.red {
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.a.darkblue {
+    background-color: #34495e;
+}
+
+.a.red {
+    background-color: #e74c3c;
+}
+
+.a.darkblue:hover, .a.red:hover {
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+/* Estilo para o botão de dropdown */
+.dropdown-tabela {
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: #f4f4f4;
+}
+
+.dropdown-tabela:hover {
+    background-color: #dfe6e9;
+}
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
+
+    /* Forçar a tabela a não se comportar como uma tabela normal */
+    table, thead, tbody, th, td, tr { 
+        display: block; 
+    }
+
+    /* Ocultar cabeçalhos da tabela (mas não usar display: none;, para acessibilidade) */
+    thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr { 
+        border: 1px solid #ccc; 
+        margin-bottom: 10px; /* Espaçamento entre linhas */
+        border-radius: 5px; /* Bordas arredondadas para as linhas */
+        overflow: hidden; /* Ocultar conteúdo excedente */
+        padding-bottom: 1px;
+    }
+
+    td { 
+        /* Comportar como uma "linha" */
+        border: none;
+        border-bottom: 1px solid #eee; 
+        position: relative;
+        padding-left: 50%; 
+        padding: 10px 5px; /* Espaçamento interno reduzido */
+        font-size: 14px; /* Tamanho da fonte reduzido */
+    }
+
+    td:before { 
+        /* Agora como um cabeçalho de tabela */
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%; 
+        padding-right: 10px; 
+        white-space: nowrap;
+        font-weight: bold; /* Destacar os rótulos */
+        color: #34495e; /* Cor do texto dos rótulos */
+        margin-bottom: 15px;
+    }
+
+    .dataTables_filter input {
+        width: 100px !important; /* Define a largura da barra de pesquisa */
+        padding: 5px; /* Ajuste o preenchimento interno da barra de pesquisa */
+        border-radius: 4px; /* Deixa os cantos arredondados */
+        border: 1px solid #ccc; /* Define uma borda */
+        font-size: 14px; /* Ajuste o tamanho da fonte */
+    }
+
+    /* Adicionando rótulos para as células */
+    td:nth-of-type(1):before { content: "ID"; }
+    td:nth-of-type(2):before { content: "Data"; }
+    td:nth-of-type(3):before { content: "Quantidade"; }
+    td:nth-of-type(4):before { content: "Documento"; }
+    td:nth-of-type(5):before { content: "Nome do Portador"; }
+    td:nth-of-type(6):before { content: "Assinatura"; }
+    td:nth-of-type(7):before { content: "Ações"; }
+}

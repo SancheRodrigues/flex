@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Mercado livre</title>
+    <link rel="shortcut icon" type="imagex/png" href="{% static 'imagens/logo_paduashop_shorticon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/create.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+    <script src="{% static 'js/select.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body class="create">
+    <div class="title">
+        <a href="javascript:history.back()">
+            <i class="fas fa-arrow-left fa-2x" style="color: white"></i>
+        </a>
+        <h1>Mercado Livre</h1>
+    </div>
+
+    <div class="container">
+        <form method="POST" action="/mercado_livre/registrar_coleta/" class="form" id="shopeeForm">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                {{ form.nome }}
+            </div>
+            
+            <div class="form-group">
+                <label for="documento">Documento RG ou CPF:</label>
+                {{ form.documento }}
+            </div>
+            
+            <div class="form-group">
+                <label for="quantidade">Quantidade:</label>
+                {{ form.quantidade }}
+            </div>
+            
+            <div class="form-group">
+                <label for="assinatura">Assinatura:</label>
+                <canvas id="signature-pad" class="signature-pad"></canvas>
+                </br>
+                </br>
+                <button type="button" id="clear-signature">Limpar Assinatura</button>
+                <input type="hidden" name="assinatura" id="assinatura">
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Registrar Coleta</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        var canvas = document.getElementById('signature-pad');
+        var signaturePad = new SignaturePad(canvas);
+        var clearButton = document.getElementById('clear-signature');
+        var assinaturaInput = document.getElementById('assinatura');
+
+        // Limpar assinatura
+        clearButton.addEventListener('click', function () {
+            signaturePad.clear();
+        });
+
+        // Antes de enviar o formulário, passar o valor da assinatura para o campo hidden
+        document.getElementById('MercadoLivreForm').addEventListener('submit', function (e) {
+            if (!signaturePad.isEmpty()) {
+                assinaturaInput.value = signaturePad.toDataURL(); // Armazena a assinatura como base64
+            }
+        });
+    </script>
+</body>
+
+</html>

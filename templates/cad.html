@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Shopee</title>
+        <link rel='stylesheet' href="{% static 'css/cad.css' %}">
+    </head>
+    <body>
+        <form class='cad'>
+            <div><label>Selecione:</label>
+                <select name="conta" id="conta">
+                <option value="Mercado Livre Flex">Mercado Livre Flex</option>
+                <option value="Shopee Flex">Shopee Flex</option>
+              </select></div>
+            <div><label>Quantidade:</label><input type='text' value=''></div>
+            <div><label>Nome:</label><input type='text' value=''></div>
+            <div><input type='submit' value='Cadastrar'></div>
+        </form>
+    </body>
+</html>
