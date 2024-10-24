@@ -67,6 +67,12 @@
         </ul>
     </div>
 
+    <div class="toggle-sidebar">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+    </div>
+
+    <div class="overlay"></div>
+
     <div class="main-content">
         {% block content %}
         {% endblock content %}
@@ -91,6 +97,29 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Seleciona os elementos da sidebar e overlay
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.overlay');
+        const toggleSidebar = document.querySelector('.toggle-sidebar');
+
+        // Adiciona evento de clique ao botão de toggle para abrir/fechar a sidebar
+        toggleSidebar.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            // Troca o ícone dependendo se a sidebar está ativa ou não
+            toggleSidebar.querySelector('ion-icon').name = sidebar.classList.contains('active') ? 'chevron-back-outline' : 'chevron-forward-outline';
+        });
+
+        // Fecha a sidebar quando clicar fora (no overlay)
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            toggleSidebar.querySelector('ion-icon').name = 'chevron-forward-outline'; // Reseta o ícone
+        });
+    </script>
+    
    
     
     

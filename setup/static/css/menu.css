@@ -7,20 +7,23 @@
 }
 
 .sidebar{
-    position: absolute;
+    position: fixed; /* Para sobrepor os outros elementos */
+    top: 0;
+    left: 0;
     width: 60px;
     height: 100vh;
-    background: #fff;
+    background: #34495e;
     overflow: hidden;
     transition: .5s;
+    z-index: 1000; /* Fica por cima dos outros conteúdos */
 }
 
-.sidebar:hover{
-    width: 300px;
+.sidebar.active{
+    width: 300px; /* Expande a sidebar quando clicada */
 }
 
 .sidebar ul li:hover {
-    background: #f3f3f3;
+    background: #34495e;
 }
 
 .sidebar ul li a {
@@ -36,7 +39,7 @@
     font-size: 1.5rem;
     min-width: 60px;
     height: 60px;
-    color: #333;
+    color: #ffff;
 }
 
 .sidebar ul li .titulo{
@@ -44,7 +47,7 @@
     height: 60px;
     display: flex;
     align-items: center;
-    color: #333;
+    color: #ffff;
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: .05rem;
@@ -60,7 +63,6 @@
 
 .sidebar ul li .logo .icone{
     font-size: 2rem;
-
 }
 
 .sidebar ul li .logo .titulo {
@@ -96,19 +98,90 @@
     cursor: pointer; 
     padding: 0; 
     width: 100%; 
-
 }
+
+/* Overlay para escurecer a tela */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999; /* Fica logo abaixo da sidebar */
+    display: none; /* Inicia escondido */
+}
+
+.overlay.active {
+    display: block; /* Exibe o overlay quando a sidebar estiver ativa */
+}
+
+/* Conteúdo principal */
 .main-content {
     flex-grow: 1; 
     transition: margin-left 0.5s ease; 
-
-}
-
-.sidebar:hover + .main-content {
-    margin-left: 300px; /* Desloca o main-content para a direita */
+    z-index: 1; /* Fica atrás da sidebar */
 }
 
 .container {
     display: flex;
 }
 
+
+.toggle-sidebar {
+    position: fixed; 
+    left: 65px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    background-color: #34495e; 
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; 
+    cursor: pointer;
+    z-index: 1000; 
+    transition: left 0.5s ease;
+}
+
+.toggle-sidebar ion-icon {
+    font-size: 24px;
+    color: #fff;
+}
+
+
+.sidebar.active + .toggle-sidebar {
+    left: 310px;
+}
+
+@media (max-width: 768px) {
+
+.toggle-sidebar {
+    position: fixed;
+    left: 65px; 
+    top: 10px; 
+    transform: translateY(0);
+    background-color: #34495e;
+    padding: 10px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    transition: left 0.5s ease;
+}
+
+.toggle-sidebar ion-icon {
+    font-size: 14px;
+    color: #fff;
+}
+
+
+.sidebar.active + .toggle-sidebar {
+    left: 305px; 
+}

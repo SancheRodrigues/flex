@@ -10,7 +10,7 @@
     position: absolute;
     width: 60px;
     height: 100vh;
-    background: #fff;
+    background: #34495e;
     overflow: hidden;
     transition: .5s;
 }
