@@ -154,7 +154,6 @@ def cad(request):
 def dashboard(request):
     return render(request, 'dashboard.html')
 
-@has_any_role_decorator('admin', 'viewer')
 @login_required(login_url="/auth/login/")
 def menu(request):
     return render(request, 'menu.html')
