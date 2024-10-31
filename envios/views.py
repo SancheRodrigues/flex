@@ -156,7 +156,7 @@ def login(request):
 def cad(request):
     return render(request, 'cad.html')
 
-@has_any_role_decorator('admin', 'viewer')
+@has_any_role_decorator('admin', 'viewer', 'expedition')
 @login_required(login_url="/auth/login/")
 def dashboard(request):
     return render(request, 'dashboard.html')
@@ -165,7 +165,7 @@ def dashboard(request):
 def menu(request):
     return render(request, 'menu.html')
 
-@has_any_role_decorator('admin', 'viewer')
+@has_any_role_decorator('admin', 'viewer', 'expedition')
 @login_required(login_url="/auth/login/")
 def shopee(request):
 
@@ -188,7 +188,7 @@ def shopee(request):
     })
 
 
-@has_any_role_decorator('admin', 'viewer')
+@has_any_role_decorator('admin', 'viewer', 'expedition')
 @login_required(login_url="/auth/login/")
 def mercado_livre(request):
 
@@ -209,7 +209,7 @@ def mercado_livre(request):
     })
 
 
-@has_any_role_decorator('admin')
+@has_any_role_decorator('admin', 'expedition')
 @login_required(login_url="/auth/login/")
 def bulk_delete_shopee(request):
     if request.method == 'POST':
@@ -222,7 +222,7 @@ def bulk_delete_shopee(request):
 
     return redirect('shopee')
 
-@has_any_role_decorator('admin')
+@has_any_role_decorator('admin', 'expedition')
 @login_required(login_url="/auth/login/")
 def bulk_delete_mercado_livre(request):
     if request.method == 'POST':
@@ -235,7 +235,7 @@ def bulk_delete_mercado_livre(request):
 
     return redirect('mercado_livre')
     
-@has_any_role_decorator('admin')
+@has_any_role_decorator('admin', 'expedition')
 @login_required(login_url="/auth/login/")
 def registrar_coleta_shopee(request):
     if request.method == "POST":
@@ -254,7 +254,7 @@ def registrar_coleta_shopee(request):
         form = ShopeeForm()  
     return render(request,'registrar_coleta_shopee.html',{'form':form})  
 
-@has_any_role_decorator('admin')
+@has_any_role_decorator('admin', 'expedition')
 @login_required(login_url="/auth/login/")
 def registrar_coleta_mercado_livre(request):
     if request.method == "POST":
