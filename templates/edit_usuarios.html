@@ -48,7 +48,7 @@
                 <select class="form-control" id="role" name="role" required>
                     <option value="admin" {% if user|has_role:'admin' %} selected {% endif %}>Admin</option>
                     <option value="viewer" {% if user|has_role:'viewer' %} selected {% endif %}>Viewer</option>
-                    <option value="expedition" {% if user|has_role:'expedition' %} selected {% endif %}>Viewer</option>
+                    <option value="expedition" {% if user|has_role:'expedition' %} selected {% endif %}>Expedition</option>
                 </select>
             </div>
 
