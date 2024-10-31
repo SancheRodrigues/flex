@@ -16,7 +16,7 @@
             <button class="button darkblue" type="submit">Filtrar</button>
         </form>
 
-        {% if user|has_role:'admin' %}
+        {% if user|has_role:'admin' or user|has_role:'expedition' %}
             <a class="a darkblue" href="/shopee/registrar_coleta">Registrar Coleta</a>
             <button type="button" class="a red" id="bulkDeleteButton" style="display:none;" onclick="showConfirmationModalForSelected()">
                 <i class="fas fa-trash-alt"></i> Excluir
