@@ -31,7 +31,7 @@
                 {% csrf_token %}
                 <thead>
                     <tr>
-                        {% if user|has_role:'admin' %}
+                        {% if user|has_role:'admin' or user|has_role:'expedition' %}
                             <th><input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)"></th>
                         {% endif %}
                         <th>Data</th>
@@ -44,7 +44,7 @@
                 <tbody>
                     {% for ml in mercado_livre %}
                     <tr>
-                        {% if user|has_role:'admin' %}
+                        {% if user|has_role:'admin' or user|has_role:'expedition' %}
                             <td><input type="checkbox" class="selectItem" name="items" value="{{ ml.id }}" onclick="toggleBulkDeleteButton()"></td>
                         {% endif %}
                         <td>{{ ml.data }}</td>

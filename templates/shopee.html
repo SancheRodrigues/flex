@@ -30,7 +30,7 @@
 
                 <thead>
                     <tr>
-                        {% if user|has_role:'admin' %}
+                        {% if user|has_role:'admin' or user|has_role:'expedition' %}
                             <th><input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)"></th>
                         {% endif %}
                         <th>Data</th>
@@ -44,7 +44,7 @@
                 <tbody>
                     {% for s in shopees %}
                     <tr>
-                        {% if user|has_role:'admin' %}
+                        {% if user|has_role:'admin' or user|has_role:'expedition' %}
                             <td><input type="checkbox" class="selectItem" name="items" value="{{ s.id }}" onclick="toggleBulkDeleteButton()"></td>
                         {% endif %}
                         <td>{{ s.data|date:"j \d\e F H:i" }}</td>
