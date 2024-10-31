@@ -5,7 +5,7 @@ class Shopee(models.Model):
     quantidade = models.IntegerField()
     documento = models.CharField(max_length=14)
     nome = models.CharField(max_length=100)
-    assinatura = models.TextField()
+    assinatura = models.TextField(blank=True)
 
     def save(self, *args, **kwargs):
  
@@ -20,7 +20,7 @@ class MercadoLivre(models.Model):
     quantidade = models.IntegerField()
     documento = models.CharField(max_length=14)
     nome = models.CharField(max_length=100)
-    assinatura = models.TextField()
+    assinatura = models.TextField(blank=True)
 
     def save(self, *args, **kwargs):
  

@@ -158,30 +158,38 @@
 
 @media (max-width: 768px) {
 
-.toggle-sidebar {
-    position: fixed;
-    left: 65px; 
-    top: 10px; 
-    transform: translateY(0);
-    background-color: #34495e;
-    padding: 10px;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 1000;
-    transition: left 0.5s ease;
-}
+    .toggle-sidebar {
+        position: fixed;
+        left: 65px; 
+        top: 10px; 
+        transform: translateY(0);
+        background-color: #34495e;
+        padding: 10px;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 1000;
+        transition: left 0.5s ease;
+    }
 
-.toggle-sidebar ion-icon {
-    font-size: 14px;
-    color: #fff;
-}
+    .toggle-sidebar ion-icon {
+        font-size: 14px;
+        color: #fff;
+    }
 
 
-.sidebar.active + .toggle-sidebar {
-    left: 305px; 
+    .sidebar.active + .toggle-sidebar {
+        left: 305px; 
+    }
+
+    .main-content {
+        margin: 0 35px; /* Centraliza o conteúdo */
+        left: 0; /* Reseta a posição para evitar sobreposição */
+        width: calc(100% - 40px); /* Ajuste a largura conforme necessário */
+    }
+
 }

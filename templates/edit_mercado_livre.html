@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Mercado Livre</title>
+    <link rel="shortcut icon" type="imagex/png" href="{% static 'imagens/logo_paduashop_shorticon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/create.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+    <script src="{% static 'js/select.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body class="create">
+    <div class="title">
+        </div>
+    <div class="container">
+        <form class="form" id="MercadoLivreForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        
+            <div class="form-group">
+                <label for="quantidade">Quantidade</label>
+                {{ form.quantidade }}
+            </div>
+        
+            <div class="form-group">
+                <label for="documento">Documento</label>
+                {{ form.documento }}
+            </div>
+        
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                {{ form.nome }}
+            </div>
+
+            <div class="form-group">
+                <label for="assinatura">Assinatura:</label>
+                
+                <!-- Exibe a assinatura existente como imagem para verificação -->
+                {% if shopee.assinatura %}
+                    <img id="existingSignature" src="{{ shopee.assinatura }}" alt="Assinatura" style="display: none;">
+                {% else %}
+                    Sem assinatura
+                {% endif %}
+                
+                <!-- Canvas para capturar a nova assinatura ou exibir a existente -->
+                <canvas id="signature-pad" class="signature-pad"></canvas>
+                </br>
+                <button class="button darkblue" type="button" id="clear-signature">Limpar Assinatura</button>
+                <input type="hidden" name="assinatura" id="assinatura">
+                <button class="button darkblue" type="button">Atualizar</button>
+            </div>
+        </form>
+ 
+        <script>
+            var canvas = document.getElementById('signature-pad');
+            var signaturePad = new SignaturePad(canvas);
+            var clearButton = document.getElementById('clear-signature');
+            var assinaturaInput = document.getElementById('assinatura');
+        
+            var existingSignature = document.getElementById('existingSignature');
+            if (existingSignature.src) {  // Verifica se a src da imagem existe
+                var img = new Image();
+                img.onload = function() {
+                    var context = canvas.getContext('2d');
+                    context.drawImage(img, 0, 0, canvas.width, canvas.height);
+                };
+                img.src = existingSignature.src;  // Carrega a assinatura no canvas
+            }
+        
+            // Limpa a assinatura do canvas
+            clearButton.addEventListener('click', function () {
+                signaturePad.clear();
+            });
+        
+            // Antes de enviar o formulário, passa o valor da assinatura para o campo hidden
+            document.getElementById('MercadoLivreForm').addEventListener('submit', function (e) {
+                if (!signaturePad.isEmpty()) {
+                    assinaturaInput.value = signaturePad.toDataURL(); // Armazena a assinatura como base64
+                }
+            });
+        </script>
+    
+</body>
+</html>

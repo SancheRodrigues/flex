@@ -50,6 +50,7 @@ main {
 
 .a.darkblue {
     background-color: #34495e;
+    margin-right: 10px;
 }
 
 .a.red {
@@ -57,6 +58,27 @@ main {
 }
 
 .a.darkblue:hover, .a.red:hover {
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.button.darkblue {
+    border: none; 
+    outline: none; 
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.button.darkblue {
+    background-color: #34495e;
+    margin-right: 10px;
+}
+
+
+.button.darkblue:hover{
     opacity: 0.9;
     transition: opacity 0.3s ease;
 }
@@ -81,7 +103,6 @@ only screen and (max-width: 760px),
     /* Forçar a tabela a não se comportar como uma tabela normal */
     table, thead, tbody, th, td, tr { 
         display: block; 
-        width: 100%; /* Expande a largura da tabela para ocupar o máximo da tela */
     }
 
     /* Ocultar cabeçalhos da tabela (mas não usar display: none;, para acessibilidade) */
@@ -97,7 +118,6 @@ only screen and (max-width: 760px),
         border-radius: 5px; /* Bordas arredondadas para as linhas */
         overflow: hidden; /* Ocultar conteúdo excedente */
         padding-bottom: 1px;
-        width: 100%; /* Força as linhas a ocupar 100% da largura */
     }
 
     td { 
@@ -108,7 +128,6 @@ only screen and (max-width: 760px),
         padding-left: 50%; 
         padding: 10px 5px; /* Espaçamento interno reduzido */
         font-size: 14px; /* Tamanho da fonte reduzido */
-        width: 100%; /* Cada célula ocupa 100% da linha */
     }
 
     td:before { 
@@ -125,19 +144,7 @@ only screen and (max-width: 760px),
     }
 
     .dataTables_filter input {
-        width: 100%; /* Define a largura da barra de pesquisa */
-        padding: 5px; /* Ajuste o preenchimento interno da barra de pesquisa */
-        border-radius: 4px; /* Deixa os cantos arredondados */
-        border: 1px solid #ccc; /* Define uma borda */
-        font-size: 14px; /* Ajuste o tamanho da fonte */
-        background-color: rgba(255, 255, 255, 0.5); /* Fundo com transparência */
-        color: #34495e; /* Cor do texto */
-        outline: none; /* Remove o contorno azul padrão */
-    }
-    
-    .dataTables_filter input::placeholder {
-        color: rgba(52, 73, 94, 0.6); /* Cor do placeholder com transparência */
-        font-style: italic; /* Estiliza o placeholder em itálico */
+        width: 65% !important; /* Define a largura da barra de pesquisa */
     }
 
     /* Adicionando rótulos para as células */

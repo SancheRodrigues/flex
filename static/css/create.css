@@ -116,6 +116,18 @@
     z-index: 1051; /* Ensure dropdown is above other elements */
 }
 
+.dropdown .dropdown-menu .dropdown-tabela {
+    text-decoration: none;
+    color: #333; /* Escolha a cor desejada */
+    padding: 8px 16px; /* Ajusta o espaçamento interno */
+    display: block;
+}
+
+.dropdown .dropdown-menu .dropdown-tabela:hover {
+    background-color: #f1f1f1; /* Cor de fundo ao passar o mouse */
+    color: #000; /* Cor de texto ao passar o mouse */
+}
+
 .select-container {
     position: relative;
 }

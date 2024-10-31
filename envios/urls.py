@@ -16,6 +16,11 @@ urlpatterns = [
     path('shopee/selected_delete/', bulk_delete_shopee, name='bulk_delete_shopee'),
     path('mercado_livre/selected_delete/', bulk_delete_mercado_livre, name='bulk_delete_mercado_livre'),
     path('mercado_livre/registrar_coleta/', registrar_coleta_mercado_livre, name='registrar_coleta_mercado_livre'),
+    path('usuario/', usuario, name='usuario'),
+    path('register/', register, name='register'),
+    path('edit_user/<int:user_id>/', edit_user, name='edit_user'),
+    path('shopee/edit/<int:id>', edit_shopee, name='edit_shopee'),
+    path('mercado_livre/edit/<int:id>', edit_mercado_livre, name='edit_mercado_livre'),
 ]
 
 

@@ -1,4 +1,5 @@
 {% load static %}
+{% load permission_tags %}
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -38,23 +39,32 @@
                 </a>
             </li>
             <li>
-                <a href="dashboard">
+                <a href="{% url 'dashboard' %}">
                     <span class="icone"><ion-icon name="bar-chart-outline"></ion-icon></span>
-                    <span class ="titulo">Dashboard</span>
+                    <span class="titulo">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="shopee">
+                <a href="{% url 'shopee' %}">
                     <span class="icone"><ion-icon name="cart-outline"></ion-icon></span>
-                    <span class ="titulo">Shopee Flex</span>
+                    <span class="titulo">Shopee Flex</span>
                 </a>
             </li>
             <li>
-                <a href="mercado_livre">
+                <a href="{% url 'mercado_livre' %}">
                     <span class="icone"><ion-icon name="cart-outline"></ion-icon></span>
-                    <span class ="titulo">Mercado Livre Flex</span>
+                    <span class="titulo">Mercado Livre Flex</span>
                 </a>
             </li>
+
+            {% if user|has_role:'admin' %}
+                <li>
+                    <a href="{% url 'usuario' %}">
+                        <span class="icone"><ion-icon name="person-outline"></ion-icon></span>
+                        <span class="titulo">Usuário</span>
+                    </a>
+                </li>
+            {% endif %}
             <li>
                 <form action="{% url 'logout' %}" method="post" style="display: inline;">
                     {% csrf_token %}

@@ -1,33 +1,52 @@
 {% extends 'menu.html' %}
 {% block title %}Shopee{% endblock %}
-
+{% load static %}
+{% load permission_tags %}
 
 {% block content %}
-
 <main class="main-content">
     <div class="table-responsive">
-        <form id="deleteForm" method="POST" action="{% url 'bulk_delete_shopee' %}">
-            {% csrf_token %}
-            <table class="records" id="ShopeeTable">
-                <a class="a darkblue" href="/shopee/registrar_coleta">Registrar Coleta</a>
-                <button type="button" class="a red" id="bulkDeleteButton" style="display:none;" onclick="showConfirmationModalForSelected()">
-                    <i class="fas fa-trash-alt"></i> Excluir
-                </button>
+        <form method="GET" action="{% url 'shopee' %}">
+            <label for="start_date">Data Inicial:</label>
+            <input type="date" name="start_date" id="start_date" value="{{ start_date }}">
+
+            <label for="end_date">Data Final:</label>
+            <input type="date" name="end_date" id="end_date" value="{{ end_date }}">
+
+            <button class="button darkblue" type="submit">Filtrar</button>
+        </form>
+
+        {% if user|has_role:'admin' %}
+            <a class="a darkblue" href="/shopee/registrar_coleta">Registrar Coleta</a>
+            <button type="button" class="a red" id="bulkDeleteButton" style="display:none;" onclick="showConfirmationModalForSelected()">
+                <i class="fas fa-trash-alt"></i> Excluir
+            </button>
+        {% endif %}
+        
+
+        <table class="records">
+            <form id="deleteForm" method="POST" action="{% url 'bulk_delete_shopee' %}">
+                {% csrf_token %}
+
                 <thead>
                     <tr>
-                        <th><input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)"></th>
+                        {% if user|has_role:'admin' %}
+                            <th><input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)"></th>
+                        {% endif %}
                         <th>Data</th>
                         <th>Quantidade</th>
                         <th>Documento</th>
                         <th>Nome do Portador</th>
                         <th>Assinatura</th>
-                        <th>Ações</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    {% for s, dt in shopees %}
+                    {% for s in shopees %}
                     <tr>
-                        <td><input type="checkbox" class="selectItem" name="items" value="{{ s.id }}" onclick="toggleBulkDeleteButton()"></td>
+                        {% if user|has_role:'admin' %}
+                            <td><input type="checkbox" class="selectItem" name="items" value="{{ s.id }}" onclick="toggleBulkDeleteButton()"></td>
+                        {% endif %}
                         <td>{{ s.data|date:"j \d\e F H:i" }}</td>
                         <td>{{ s.quantidade }}</td>
                         <td>{{ s.documento }}</td>
@@ -39,22 +58,28 @@
                                 Sem assinatura
                             {% endif %}
                         </td>
-                        <td>
-                            <div class="dropdown" id="dropdownMenu">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-tabela" href="/shopee/edit/{{ s.id }}"><i class="fas fa-edit"></i> Editar</a>
-                                </div>
-                            </div>
-                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
-            </table>
-        </form>
+            </form>
+        </table>
     </div>
 </main>
+
+<script>
+
+window.onload = function() {
+    const today = new Date().toISOString().split('T')[0];
+    const startDate = document.getElementById("start_date");
+    const endDate = document.getElementById("end_date");
+
+    if (!startDate.value) {
+        startDate.value = today;
+    }
+    if (!endDate.value) {
+        endDate.value = today;
+    }
+};
+</script>
 
 {% endblock %}

@@ -50,6 +50,7 @@ main {
 
 .a.darkblue {
     background-color: #34495e;
+    margin-right: 10px;
 }
 
 .a.red {
@@ -57,6 +58,27 @@ main {
 }
 
 .a.darkblue:hover, .a.red:hover {
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.button.darkblue {
+    border: none; 
+    outline: none; 
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.button.darkblue {
+    background-color: #34495e;
+    margin-right: 10px;
+}
+
+
+.button.darkblue:hover{
     opacity: 0.9;
     transition: opacity 0.3s ease;
 }
@@ -122,11 +144,7 @@ only screen and (max-width: 760px),
     }
 
     .dataTables_filter input {
-        width: 100px !important; /* Define a largura da barra de pesquisa */
-        padding: 5px; /* Ajuste o preenchimento interno da barra de pesquisa */
-        border-radius: 4px; /* Deixa os cantos arredondados */
-        border: 1px solid #ccc; /* Define uma borda */
-        font-size: 14px; /* Ajuste o tamanho da fonte */
+        width: 65% !important; /* Define a largura da barra de pesquisa */
     }
 
     /* Adicionando rótulos para as células */

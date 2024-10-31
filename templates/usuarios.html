@@ -1,0 +1,31 @@
+{% extends 'menu.html' %}
+{% block title %}Usuários{% endblock %}
+
+{% block content %}
+<main>
+    <div class="table-responsive">
+      <table class="records">
+        <a href="{% url 'register' %}" class="a darkblue">Cadastrar Novo Usuário</a>
+        <thead>
+            <tr>
+                <th>Usuário</th>
+                <th>Último Login</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.last_login }}</td>
+                <td>
+                    <a href="{% url 'edit_user' user_id=usuario.id %}" class="a darkblue">Editar</a>
+                </td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+</main>
+{% endblock %}

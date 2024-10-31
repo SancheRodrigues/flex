@@ -54,7 +54,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
+    'rolepermissions',
 ]
+
+ROLEPERMISSIONS_MODULE = 'setup.roles'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
