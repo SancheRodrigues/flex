@@ -46,6 +46,8 @@ def register(request):
             assign_role(user, 'admin')
         elif role == 'viewer':
             assign_role(user, 'viewer')
+        elif role == 'expedition':
+            assign_role(user, 'expedition')
 
 
         # Salvando o usuário antes de adicionar aos grupos
@@ -57,6 +59,9 @@ def register(request):
             user.groups.add(admin_group)
         elif role == 'viewer':
             viewer_group = Group.objects.get(name='viewer')
+            user.groups.add(viewer_group)
+        elif role == 'expedition':
+            viewer_group = Group.objects.get(name='expedition')
             user.groups.add(viewer_group)
   
         return redirect('/usuario/')
@@ -96,6 +101,8 @@ def edit_user(request, user_id):
             user.groups.add(Group.objects.get(name='admin'))
         elif role == 'viewer':
             user.groups.add(Group.objects.get(name='viewer'))
+        elif role == 'expedition':
+            user.groups.add(Group.objects.get(name='expedition'))
         
         if user.groups.filter(name="admin").exists():
             return redirect("/auth/login/")

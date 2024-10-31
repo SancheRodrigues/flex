@@ -6,3 +6,6 @@ class Admin(AbstractUserRole):
 
 class Viewer(AbstractUserRole):
     pass
+
+class Expedition(AbstractUserRole):
+    pass
