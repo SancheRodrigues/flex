@@ -24,11 +24,12 @@
                 <i class="fas fa-trash-alt"></i> Excluir
             </button>
         {% endif %}
+
+        <form id="deleteForm" method="POST" action="{% url 'bulk_delete_mercado_livre' %}">
+            {% csrf_token %}
         
         <table class="records">
 
-            <form id="deleteForm" method="POST" action="{% url 'bulk_delete_mercado_livre' %}">
-                {% csrf_token %}
                 <thead>
                     <tr>
                         {% if user|has_role:'admin' or user|has_role:'expedition' %}

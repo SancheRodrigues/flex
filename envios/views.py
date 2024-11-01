@@ -214,15 +214,19 @@ def mercado_livre(request):
 def bulk_delete_shopee(request):
     if request.method == 'POST':
         selected_items = request.POST.getlist('items')
+        print(selected_items)
         if selected_items:
             Shopee.objects.filter(id__in=selected_items).delete()
             messages.success(request, f'{len(selected_items)} produtos foram excluídos.')
         else:
             messages.warning(request, 'Nenhum produto foi selecionado.')
+            print(request)
+            print("Nenhum produto selecionado")
+            print(selected_items)
 
     return redirect('shopee')
 
-@has_any_role_decorator('admin', 'expedition')
+#@has_any_role_decorator('admin', 'expedition')
 @login_required(login_url="/auth/login/")
 def bulk_delete_mercado_livre(request):
     if request.method == 'POST':

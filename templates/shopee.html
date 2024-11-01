@@ -23,10 +23,10 @@
             </button>
         {% endif %}
         
+        <form id="deleteForm" method="POST" action="{% url 'bulk_delete_shopee' %}">
+            {% csrf_token %}
 
         <table class="records">
-            <form id="deleteForm" method="POST" action="{% url 'bulk_delete_shopee' %}">
-                {% csrf_token %}
 
                 <thead>
                     <tr>
