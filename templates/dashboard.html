@@ -1,6 +1,74 @@
 {% extends 'menu.html' %}
 {% block title %}Dashboard{% endblock %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/create.css' %}">
+
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-form-wrapper">
+            <h2>Dashboard de Vendas</h2>
+            <form id="filterForm" method="GET" action="{% url 'dashboard' %}">
+                <label for="start_date">Data Inicial:</label>
+                <input type="date" name="start_date" id="start_date" value="{{ start_date|date:'Y-m-d' }}">
+            
+                <label for="end_date">Data Final:</label>
+                <input type="date" name="end_date" id="end_date" value="{{ end_date|date:'Y-m-d' }}">
+            
+                <button class="button darkblue" type="submit">Filtrar</button>
+            </form>
+            
+            <div class="chart-container">
+                <canvas id="pizzaChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        var ctx = document.getElementById('pizzaChart').getContext('2d');
+        var pizzaChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Shopee', 'Mercado Livre'],
+                datasets: [{
+                    data: [
+                        {{ shopee_quantidade }},
+                        {{ mercado_livre_quantidade }}
+                    ],
+                    backgroundColor: ['#FF6384', '#36A2EB']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                }
+            }
+        });
+    </script>
+
+    <script>
+        window.onload = function() {
+            const today = new Date();
+            const startDateInput = document.getElementById("start_date");
+            const endDateInput = document.getElementById("end_date");
+
+            if (!startDateInput.value) {
+                const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+                startDateInput.value = firstDayOfMonth.toISOString().split('T')[0];
+            }
+
+            if (!endDateInput.value) {
+                endDateInput.value = today.toISOString().split('T')[0];
+            }
+        };
+    </script>
+
+    
+</body>
+
 
 {% endblock %}

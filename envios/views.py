@@ -7,13 +7,15 @@ from envios.models import *
 from django.contrib import messages
 from envios.forms import *
 from django.utils import timezone
-from django.utils.timezone import now, localtime
-from datetime import datetime, timedelta
+from django.utils.timezone import now, make_aware
+from datetime import datetime, timedelta, time
+from django.db.models import Sum
 from rolepermissions.checkers import has_role
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.models import User, Group
 from rolepermissions.roles import assign_role
 from django.contrib.auth.hashers import make_password
+from django.utils.dateparse import parse_date
 
 def has_any_role_decorator(*roles):
     def decorator(view_func):
@@ -304,3 +306,38 @@ def edit_mercado_livre(request, id):
         form = MercadoLivreForm(instance=mercado_livre)
     
     return render(request, 'edit_mercado_livre.html', {'form': form, 'mercado_livre': mercado_livre})
+
+@login_required(login_url="/auth/login/")
+def dashboard(request):
+    hoje = make_aware(datetime.now().replace(hour=23, minute=59, second=59, microsecond=999999))
+    primeiro_dia_mes = hoje.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+
+    if start_date and end_date:
+        start_date = parse_date(start_date) 
+        end_date = parse_date(end_date)
+        end_date = make_aware(datetime.combine(end_date, time(23, 59, 59, 999999)))
+        start_date = make_aware(datetime.combine(start_date, time(0, 0, 0))) 
+    else:
+        start_date = primeiro_dia_mes
+        end_date = hoje
+
+
+    shopee_quantidade = Shopee.objects.filter(
+        data__range=[start_date, end_date]
+    ).aggregate(total_quantidade=Sum('quantidade'))['total_quantidade'] or 0
+
+    mercado_livre_quantidade = MercadoLivre.objects.filter(
+        data__range=[start_date, end_date]
+    ).aggregate(total_quantidade=Sum('quantidade'))['total_quantidade'] or 0
+
+    context = {
+        'shopee_quantidade': shopee_quantidade,
+        'mercado_livre_quantidade': mercado_livre_quantidade,
+        'start_date': start_date.date(),  # Passa apenas a data para o HTML
+        'end_date': end_date.date(),      # Passa apenas a data para o HTML
+    }
+
+    return render(request, 'dashboard.html', context)
